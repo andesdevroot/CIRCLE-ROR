@@ -45,7 +45,7 @@ def create
 private
 
 def set_community
-  @community = Community.find(param[:id])
+  @community = Community.find(params[:id])
 end
 
 def community_params

@@ -1,7 +1,8 @@
-<% form_for @community do |form| %>
+<%= form_for Community.new do |f| %>
 <div class="form-group">
   <%= label_tag :name %>
-  <%= form.text_field :name, class: "form-control" %>
+  <%= text_field :name, class: "form-control" %>
 </div>
 
+<%= f.submit "Submit", class: "btn btn-primary" %>
 <% end %>

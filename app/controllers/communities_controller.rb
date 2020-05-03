@@ -10,6 +10,7 @@ def show
 end
 
 def new
+  @communities = Community.new
 end
 
 def create

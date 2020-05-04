@@ -1,28 +1,29 @@
-class CommunitiesController < ApplicationController
+class PostsController < ApplicationController
 before_action :authenticate_account!, except: [ :index, :show ]
-before_action :set_community, only: [:show]
+before_action :set_post, only: [:show]
 
 
 
 def index
-  @communities = Community.all
+  @posts = Post.all
 end
 
 def show
-  @community = Community.find(params[:id])
+  @post = Post.find(params[:id])
 end
 
 def new
-  @community = Community.new
+  @community = Community.find(params[:community_id])
+  @post = Post.new
 end
 
 def create
 
-    @community = Community.new (community_params)
-    @community.account_id = current_account.id
+    @post = Post.new (post_params)
+    @post.account_id = current_account.id
 
-     if @community.save
-       redirect_to communities_path
+     if @post.save
+       redirect_to community_path(@post.community_id)
      else
        render :new
       end
@@ -42,12 +43,12 @@ def create
 
 private
 
-def set_community
-  @community = Community.find(params[:id])
+def set_post
+  @post = Post.find(params[:id])
 end
 
-def community_params
-   params.require(:community).permit(:name, :url, :rules)
+def post_params
+   params.require(:post).permit(:title, :body)
 end
 
 end
